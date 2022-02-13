@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_17tcoy6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="Authentication" name="Authentication" isExecutable="true">
+    <bpmn:userTask id="Activity_0l4v7sy" name="Enter login and password">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="login" label="Login" type="string" />
+          <camunda:formField id="password" label="Password" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1mc8boa</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rr67qy</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Check_Log_pass" name="Check login and password" camunda:class="com.bpm.workflow.delegates.AuthenticationDelegate">
+      <bpmn:incoming>Flow_1rr67qy</bpmn:incoming>
+      <bpmn:outgoing>Flow_04m578r</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1rr67qy" sourceRef="Activity_0l4v7sy" targetRef="Check_Log_pass" />
+    <bpmn:startEvent id="Start" name="Start">
+      <bpmn:outgoing>Flow_1mc8boa</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1mc8boa" sourceRef="Start" targetRef="Activity_0l4v7sy" />
+    <bpmn:exclusiveGateway id="Gateway_1nxnv2w">
+      <bpmn:incoming>Flow_04m578r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hvztxs</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1iufp48</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_04m578r" sourceRef="Check_Log_pass" targetRef="Gateway_1nxnv2w" />
+    <bpmn:sequenceFlow id="Flow_0hvztxs" name="true" sourceRef="Gateway_1nxnv2w" targetRef="Event_0sg6j3d">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{output==true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_0sg6j3d" name="Success">
+      <bpmn:incoming>Flow_0hvztxs</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1iufp48" name="false" sourceRef="Gateway_1nxnv2w" targetRef="Event_1xsj9n4">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{output==false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_1xsj9n4" name="error">
+      <bpmn:incoming>Flow_1iufp48</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Authentication">
+      <bpmndi:BPMNEdge id="Flow_1rr67qy_di" bpmnElement="Flow_1rr67qy">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="460" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mc8boa_di" bpmnElement="Flow_1mc8boa">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04m578r_di" bpmnElement="Flow_04m578r">
+        <di:waypoint x="560" y="117" />
+        <di:waypoint x="655" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hvztxs_di" bpmnElement="Flow_0hvztxs">
+        <di:waypoint x="705" y="117" />
+        <di:waypoint x="784" y="117" />
+        <di:waypoint x="784" y="100" />
+        <di:waypoint x="862" y="100" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="791" y="82" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iufp48_di" bpmnElement="Flow_1iufp48">
+        <di:waypoint x="680" y="142" />
+        <di:waypoint x="680" y="230" />
+        <di:waypoint x="762" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="684" y="183" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="Start">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="185" y="142" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pj2ps2_di" bpmnElement="Activity_0l4v7sy">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15npfhc_di" bpmnElement="Check_Log_pass">
+        <dc:Bounds x="460" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1nxnv2w_di" bpmnElement="Gateway_1nxnv2w" isMarkerVisible="true">
+        <dc:Bounds x="655" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xsj9n4_di" bpmnElement="Event_1xsj9n4">
+        <dc:Bounds x="762" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="768" y="255" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0sg6j3d_di" bpmnElement="Event_0sg6j3d">
+        <dc:Bounds x="862" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="860" y="125" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
