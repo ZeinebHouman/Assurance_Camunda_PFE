@@ -40,6 +40,15 @@ public class userController {
 
     }
 
+    public boolean existsUserByEmailAndPassword(String email,String password)
+    {
+       // System.out.println("iciiiiiiiiiiiiii\n");
+      return myService.existUser(email,password);
+
+
+
+    }
+
     @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user)
     {

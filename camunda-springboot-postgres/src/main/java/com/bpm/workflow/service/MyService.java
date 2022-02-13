@@ -71,14 +71,15 @@ public class MyService {
         return personRepository.findUserById(id)
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + "was not found"));
     }
-    public boolean findUserById(String email)
-    {
-        return personRepository.existsByEmail(email);
-    }
+
 
 
     public void deleteUser(Long id){
         personRepository.deleteUserById(id);
+    }
+
+    public boolean existUser(String email,String password){
+        return personRepository.existsByEmailAndPassword(email,password);
     }
 
 
