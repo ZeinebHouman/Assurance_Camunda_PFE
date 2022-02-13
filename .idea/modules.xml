@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Authentication_springBoot_Camunda.iml" filepath="$PROJECT_DIR$/.idea/Authentication_springBoot_Camunda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/camunda-springboot-postgres/camundapostgres.iml" filepath="$PROJECT_DIR$/camunda-springboot-postgres/camundapostgres.iml" />
+    </modules>
+  </component>
+</project>
