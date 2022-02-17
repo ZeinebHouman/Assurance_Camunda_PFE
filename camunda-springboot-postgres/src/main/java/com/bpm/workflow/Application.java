@@ -12,9 +12,17 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(proxyBeanMethods = false)
 public class Application {
-
+  static  int attempts=0;
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
+  }
+
+  public static int getAttempts() {
+    return attempts;
+  }
+
+  public static void setAttempts() {
+    Application.attempts++;
   }
 
   @Bean
@@ -27,7 +35,7 @@ public class Application {
       @Override
       public void run(String... strings) throws Exception {
 
-        myService.createDemoUsers();
+       // myService.createDemoUsers();
        /* System.out.println("Number of process definitions : "
                 + repositoryService.createProcessDefinitionQuery().count());
         System.out.println("Number of tasks : " + taskService.createTaskQuery().count());

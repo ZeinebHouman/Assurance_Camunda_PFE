@@ -41,17 +41,17 @@ public class MyService {
         return taskService.createTaskQuery().taskAssignee(assignee).list();
     }
 
-    public void createDemoUsers() {
+   /* public void createDemoUsers() {
         if (personRepository.findAll().size() == 0) {
             personRepository.save(new User(1, "zeinebhouman9@gmail.com", "123", "zeineb","houman","dev","123456") );
             personRepository.save(new User(2, "zaaaa@gmail.com", "123", "aaaa","houman","dev","47896333" ));
         }
-    }
+    }*/
 
 
     public User addUser(User user)
     {
-        user.setId(Double.parseDouble(UUID.randomUUID().toString()));
+       // user.setId(String.valueOf(Double.parseDouble(String.valueOf(UUID.randomUUID()))));
         return personRepository.save(user);
     }
 

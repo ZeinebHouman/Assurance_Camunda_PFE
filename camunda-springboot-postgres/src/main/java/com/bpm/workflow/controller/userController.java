@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/")
 public class userController {
 
     @Autowired
     private MyService myService;
 
+    @GetMapping(value="home")
+    public String home () {
+       return "home";
+    }
     @PostMapping(value="/process")
     public void startProcessInstance(@RequestBody StartProcessRepresentation startProcessRepresentation) {
         myService.startProcess(startProcessRepresentation.getAssignee());
@@ -45,8 +50,6 @@ public class userController {
        // System.out.println("iciiiiiiiiiiiiii\n");
       return myService.existUser(email,password);
 
-
-
     }
 
     @PostMapping("/add")
@@ -67,9 +70,6 @@ public class userController {
         myService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
 
 
     static class StartProcessRepresentation {

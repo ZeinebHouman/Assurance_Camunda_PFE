@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,22 +11,24 @@ import java.io.Serializable;
 @Getter
 @Builder
 @ToString
+@AllArgsConstructor
 @Entity
 @Table(name = "user", schema = "public")
 public class User implements Serializable {
 
     @Id
     @Column(nullable=false , updatable =false)
-    private double id;
+    private Double id;
     private String email;
     private String password;
     private String firstname;
     private String lastname;
     private String jobTitle;
     private String phone;
+    private static double c=0;
     public User(){}
-    public User(double id, String email, String password, String firstname, String lastname, String jobTitle, String phone) {
-        this.id = id;
+    public User(String email, String password, String firstname, String lastname, String jobTitle, String phone) {
+        this.id=++c;
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -36,11 +37,11 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public double getId() {
+    public Double getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(Double id) {
         this.id = id;
     }
 
